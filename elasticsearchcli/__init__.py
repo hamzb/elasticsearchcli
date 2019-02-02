@@ -35,6 +35,9 @@ def main():
                     default = cmd_options[first_sub_command]['subcommands'][second_sub_command]['arguments'][arg]['default'],
                     help = cmd_options[first_sub_command]['subcommands'][second_sub_command]['arguments'][arg]['help'],
                 )
+                
+    version_cmd = main_subparser.add_parser('version', help='Shows the currently installed version')
+    version_cmd.set_defaults(func=get_version)
 
     args = parser.parse_args()
     # Creating a connection to elasticsearch cluster

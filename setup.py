@@ -1,7 +1,8 @@
 from setuptools import setup
+from elasticsearchcli.utils import escli_version
 
 setup(name='elasticsearchcli',
-      version='0.1-alpha',
+      version=escli_version,
       description='A command line utility to interact with Elasticsearch',
       url='https://github.com/hamzb/escli',
       author='Hamza Boulaares',
@@ -13,4 +14,4 @@ setup(name='elasticsearchcli',
           'elasticsearch',
           'argparse'
       ],
-      scripts=['bin/escli'])
+      scripts=['escli'])

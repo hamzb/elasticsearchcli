@@ -1,8 +1,0 @@
-#!/usr/bin/env python3
-import elsticsearchcli
-
-def main():
-    return elsticsearchcli.main()
-
-if __name__ == '__main__':
-    main()

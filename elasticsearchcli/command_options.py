@@ -1,6 +1,7 @@
 from elasticsearchcli.utils import *
 
 # Defining dictionary to contain the commands, sub-commands and arguments
+
 cmd_options = {
     'cluster': {
         'help': 'command for cluster level operations',
@@ -156,8 +157,8 @@ cmd_options = {
         }
     },
     'snapshot': {
-        'help': 'command for index level operations',
-        'title': 'index operations subcommands',
+        'help': 'command for snapshot level operations',
+        'title': 'snapshot operations subcommands',
         'subcommands': {
             'list': {
                 'help': 'Lists the snapshots',
@@ -170,5 +171,5 @@ cmd_options = {
                 'arguments':{}
             }
         }
-    }
+    },
 }

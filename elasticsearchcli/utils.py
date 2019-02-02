@@ -1,5 +1,10 @@
 import json
 
+escli_version = "0.1-alpha"
+
+def get_version(args):
+    print(escli_version)
+
 def get_cluster_health(args):
     if args.cluster_index:
         args.cluster_index = args.cluster_index.replace(' ', '')
