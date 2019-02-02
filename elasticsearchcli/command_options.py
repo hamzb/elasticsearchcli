@@ -1,4 +1,4 @@
-from utils import *
+from elasticsearchcli.utils import *
 
 # Defining dictionary to contain the commands, sub-commands and arguments
 cmd_options = {
