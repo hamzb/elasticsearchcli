@@ -1,0 +1,4 @@
+*.log
+*cmd*
+__*__
+operations.txt
