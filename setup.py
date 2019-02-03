@@ -10,8 +10,8 @@ setup(name='elasticsearchcli',
       license='GPLv3.0',
       packages=['elasticsearchcli'],
       zip_safe=False,
-      install_requires=[
-          'elasticsearch',
-          'argparse'
-      ],
-      scripts=['escli'])
+      install_requires=['elasticsearch'],
+      python_requires='>=3',
+      scripts=['escli'],
+      classifiers=["Programming Language :: Python :: 3"],
+      )
