@@ -5,14 +5,10 @@ from elasticsearchcli.command_options import *
 
 def main():
     env_cluster_address = os.environ.get('ES_CLUSTER_ADDRESS')
-    if not env_cluster_address:
-        cluster_option_required = True
-    else:
-        cluster_option_required = False
 
     # Define main parser and sub-parser for main commands
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cluster', dest='es_cluster_address', required=cluster_option_required, default=env_cluster_address, help='Specify elasticsearch cluster address using this option, or set the environment variable ES_CLUSTER_ADDRESS')
+    parser.add_argument('--cluster', dest='es_cluster_address', required=False, default=env_cluster_address, help='Specify elasticsearch cluster address using this option, or set the environment variable ES_CLUSTER_ADDRESS')
     main_subparser = parser.add_subparsers(title='sub-commands', dest='sub-commands')
     main_subparser.required = True
 
@@ -40,7 +36,14 @@ def main():
     version_cmd.set_defaults(func=get_version)
 
     args = parser.parse_args()
-    # Creating a connection to elasticsearch cluster
-    es_connection = Elasticsearch([args.es_cluster_address])
-    args.es_connection = es_connection
+    if vars(args)['sub-commands'].lower() != 'version':
+        try:
+            assert(args.es_cluster_address)
+        except AssertionError:
+            print("Eleasticsearch address was not found. Make sure to pass with '--cluster' option or to set the environment variable 'ES_CLUSTER_ADDRESS'")
+            exit(1)
+        else:
+            es_connection = Elasticsearch([args.es_cluster_address])
+            args.es_connection = es_connection
+
     args.func(args)
