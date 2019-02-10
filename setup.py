@@ -4,7 +4,7 @@ from elasticsearchcli.utils import escli_version
 setup(name='elasticsearchcli',
       version=escli_version,
       description='A command line utility to interact with Elasticsearch',
-      url='https://github.com/hamzb/escli',
+      url='https://github.com/hamzb/elasticsearchcli',
       author='Hamza Boulaares',
       author_email='hamza.boulaares@gmail.com',
       license='GPLv3.0',
