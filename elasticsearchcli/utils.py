@@ -49,8 +49,36 @@ def list_shards(args):
         args.index_id = args.index_id.replace(' ', '')
     print(json.dumps(args.es_connection.cat.shards(index=args.index_id, format='json'), indent=2))
 
-def list_snapshots(args):
-    print(json.dumps(args.es_connection.snapshot.get(), indent=2))
-
 def list_repos(args):
     print(json.dumps(args.es_connection.snapshot.get_repository(), indent=2))
+
+def list_snapshots(args):
+    if args.snapshot:
+        args.snapshot = args.snapshot.replace(' ', '')
+    print(json.dumps(args.es_connection.snapshot.get(repository=args.repository, snapshot=args.snapshot, ignore_unavailable=args.ignore_unavailable), indent=2))
+
+def create_repo(args):
+    print(json.dumps(args.es_connection.snapshot.create_repository(repository=args.repository, body=args.repository_config), indent=2))
+
+def create_snapshot(args):
+    if args.indices:
+        args.indices = args.indices.replace(' ', '')
+    snapshot_body = {"indices": args.indices, "ignore_unavailable": args.ignore_unavailable, "include_global_state": args.include_global_state}
+    snapshot_body_json = json.dumps(snapshot_body)
+    print(json.dumps(args.es_connection.snapshot.create(
+        repository=args.repository, 
+        snapshot=args.snapshot,
+        body=snapshot_body_json,
+        wait_for_completion=args.wait_for_completion), indent=2))
+
+def delete_snapshot(args):
+    print(json.dumps(args.es_connection.snapshot.delete(repository=args.repository, snapshot=args.snapshot), indent=2))
+
+def restore_snapshot(args):
+    print(json.dumps(args.es_connection.snapshot.restore(), indent=2))
+
+def snapshot_status(args):
+    print(json.dumps(args.es_connection.snapshot.status(), indent=2))
+
+def verify_repo(args):
+    print(json.dumps(args.es_connection.snapshot.verify_repository(), indent=2))
