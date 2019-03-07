@@ -75,10 +75,18 @@ def delete_snapshot(args):
     print(json.dumps(args.es_connection.snapshot.delete(repository=args.repository, snapshot=args.snapshot), indent=2))
 
 def restore_snapshot(args):
-    print(json.dumps(args.es_connection.snapshot.restore(), indent=2))
+    if args.indices:
+        args.indices = args.indices.replace(' ', '')
+    snapshot_body = {"indices": args.indices, "ignore_unavailable": args.ignore_unavailable, "include_global_state": args.include_global_state}
+    snapshot_body_json = json.dumps(snapshot_body)
+    print(json.dumps(args.es_connection.snapshot.restore(
+        repository=args.repository, 
+        snapshot=args.snapshot,
+        body=snapshot_body_json,
+        wait_for_completion=args.wait_for_completion), indent=2))
 
 def snapshot_status(args):
-    print(json.dumps(args.es_connection.snapshot.status(), indent=2))
+    print(json.dumps(args.es_connection.snapshot.status(repository=args.repository, snapshot=args.snapshot), indent=2))
 
 def verify_repo(args):
-    print(json.dumps(args.es_connection.snapshot.verify_repository(), indent=2))
+    print(json.dumps(args.es_connection.snapshot.verify_repository(repository=args.repository), indent=2))

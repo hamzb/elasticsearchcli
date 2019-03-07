@@ -165,6 +165,39 @@ cmd_options = {
                 'function': list_repos,
                 'arguments':{}
             },
+            'create-repo': {
+                'help': 'Create a snapshot repository',
+                'function': create_repo,
+                'arguments':{
+                    'repository': {
+                        'name': '--repository',
+                        'dest': 'repository',
+                        'required': True,
+                        'default': None,
+                        'help': 'Repository name'
+                    },
+                    'repo-config': {
+                        'name': '--repository-config',
+                        'dest': 'repository_config',
+                        'required': True,
+                        'default': None,
+                        'help': 'Repository settings in json format'
+                    }
+                }
+            },
+            'verify-repo': {
+                'help': 'Verify repository availability on all nodes',
+                'function': verify_repo,
+                'arguments':{
+                    'repository': {
+                        'name': '--repository',
+                        'dest': 'repository',
+                        'required': True,
+                        'default': None,
+                        'help': 'Repository name'
+                    }
+                }
+            },
             'list': {
                 'help': 'Lists the snapshots',
                 'function': list_snapshots,
@@ -189,26 +222,6 @@ cmd_options = {
                         'required': False,
                         'default': False,
                         'help': 'Whether to ignore unavailable snapshots or throw an exception for them. Default is False.'
-                    }
-                }
-            },
-            'create-repo': {
-                'help': 'Create a snapshot repository',
-                'function': create_repo,
-                'arguments':{
-                    'repository': {
-                        'name': '--repository',
-                        'dest': 'repository',
-                        'required': True,
-                        'default': None,
-                        'help': 'Repository name'
-                    },
-                    'repo-config': {
-                        'name': '--repository-config',
-                        'dest': 'repository_config',
-                        'required': True,
-                        'default': None,
-                        'help': 'Repository settings in json format'
                     }
                 }
             },
@@ -277,6 +290,74 @@ cmd_options = {
                         'required': True,
                         'default': None,
                         'help': 'A comma-separated list of snapshot names'
+                    }
+                }
+            },
+            'status': {
+                'help': 'Retrieves the status of a snapshot',
+                'function': snapshot_status,
+                'arguments':{
+                    'repository': {
+                        'name': '--repository',
+                        'dest': 'repository',
+                        'required': True,
+                        'default': None,
+                        'help': 'Snapshots repository'
+                    },
+                    'snapshot': {
+                        'name': '--snapshot',
+                        'dest': 'snapshot',
+                        'required': True,
+                        'default': None,
+                        'help': 'A comma-separated list of snapshot names'
+                    }
+                }
+            },
+            'restore': {
+                'help': 'Restores a snapshot',
+                'function': restore_snapshot,
+                'arguments':{
+                    'repository': {
+                        'name': '--repository',
+                        'dest': 'repository',
+                        'required': True,
+                        'default': None,
+                        'help': 'Snapshots repository'
+                    },
+                    'snapshot': {
+                        'name': '--snapshot',
+                        'dest': 'snapshot',
+                        'required': True,
+                        'default': None,
+                        'help': 'A comma-separated list of snapshot names'
+                    },
+                    'indices': {
+                        'name': '--indices',
+                        'dest': 'indices',
+                        'required': False,
+                        'default': '_all',
+                        'help': 'The list of indices to restore. Default is all indices.'
+                    },
+                    'ignore_unavailable': {
+                        'name': '--ignore-unavailable',
+                        'dest': 'ignore_unavailable',
+                        'required': False,
+                        'default': True,
+                        'help': 'Whether to ignore unavailable indices or throw an exception. Default is True'
+                    },
+                    'include_global_state': {
+                        'name': '--ignore-global-state',
+                        'dest': 'include_global_state',
+                        'required': False,
+                        'default': False,
+                        'help': 'Whether to include the global state in the snapshot. Default is False'
+                    },
+                    'wait_for_completion': {
+                        'name': '--wait-for-completion',
+                        'dest': 'wait_for_completion',
+                        'required': False,
+                        'default': False,
+                        'help': 'Whether to wait for the restore completion. Default is False'
                     }
                 }
             },
