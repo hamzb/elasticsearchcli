@@ -58,7 +58,9 @@ def list_snapshots(args):
     print(json.dumps(args.es_connection.snapshot.get(repository=args.repository, snapshot=args.snapshot, ignore_unavailable=args.ignore_unavailable), indent=2))
 
 def create_repo(args):
-    print(json.dumps(args.es_connection.snapshot.create_repository(repository=args.repository, body=args.repository_config), indent=2))
+    with open(args.config_file_path) as config_file:  
+        repo_config = json.load(config_file)
+    print(json.dumps(args.es_connection.snapshot.create_repository(repository=args.repository, body=repo_config), indent=2))
 
 def create_snapshot(args):
     if args.indices:
@@ -90,3 +92,7 @@ def snapshot_status(args):
 
 def verify_repo(args):
     print(json.dumps(args.es_connection.snapshot.verify_repository(repository=args.repository), indent=2))
+
+def delete_repo(args):
+    args.repository = args.repository.replace(' ', '')
+    print(json.dumps(args.es_connection.snapshot.delete_repository(repository=args.repository), indent=2))

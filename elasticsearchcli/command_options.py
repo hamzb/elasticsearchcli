@@ -176,9 +176,9 @@ cmd_options = {
                         'default': None,
                         'help': 'Repository name'
                     },
-                    'repo-config': {
-                        'name': '--repository-config',
-                        'dest': 'repository_config',
+                    'repo-config-file': {
+                        'name': '--repository-config-file',
+                        'dest': 'config_file_path',
                         'required': True,
                         'default': None,
                         'help': 'Repository settings in json format'
@@ -188,6 +188,19 @@ cmd_options = {
             'verify-repo': {
                 'help': 'Verify repository availability on all nodes',
                 'function': verify_repo,
+                'arguments':{
+                    'repository': {
+                        'name': '--repository',
+                        'dest': 'repository',
+                        'required': True,
+                        'default': None,
+                        'help': 'Repository name'
+                    }
+                }
+            },
+            'delete-repo': {
+                'help': 'Delete repository configuration',
+                'function': delete_repo,
                 'arguments':{
                     'repository': {
                         'name': '--repository',
