@@ -64,7 +64,7 @@ cmd_options = {
                         'dest': 'node_id',
                         'required': False,
                         'default': None,
-                        'help': 'Limit the results to the specified node'
+                        'help': 'Limit the results to the specified nodes'
                     },
                     'metrics': {
                         'name': '--metrics',
@@ -84,7 +84,7 @@ cmd_options = {
                         'dest': 'node_id',
                         'required': False,
                         'default': None,
-                        'help': 'Limit the results to the specified node'
+                        'help': 'Limit the results to the specified nodes'
                     },
                     'metrics': {
                         'name': '--metrics',
@@ -111,7 +111,7 @@ cmd_options = {
                         'dest': 'node_id',
                         'required': False,
                         'default': None,
-                        'help': 'Limit the results to the specified node'
+                        'help': 'Limit the results to the specified nodes'
                     },
                 }
             }
