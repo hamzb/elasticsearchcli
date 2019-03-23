@@ -103,7 +103,7 @@ cmd_options = {
                 }
             },
             'usage': {
-                'help': 'Retrieves node uage',
+                'help': 'Retrieves node usage',
                 'function': get_node_usage,
                 'arguments': {
                     'node-id': {
