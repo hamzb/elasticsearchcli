@@ -18,6 +18,21 @@ def get_cluster_health(args):
 def get_cluster_state(args):
     print(json.dumps(args.es_connection.cluster.state(), indent=2))
 
+def get_cluster_settings(args):
+    print(json.dumps(args.es_connection.cluster.get_settings(include_defaults=args.include_defaults, flat_settings=args.flat_settings), indent=2))
+
+def set_shard_allocation(args):
+    try:
+        assert(args.update_mode in ['persistent', 'transient'])
+        assert(args.shard_allocation_mode in ['all', 'primaries', 'new_primaries', 'none'])
+    except AssertionError:
+        print("Error - Incorrect settings\n--update-mode should be (persistent|transient)\n--shard-allocation-mode should be (all|primaries|new_primaries|none)")
+        exit(1)
+    data = {args.update_mode: {"cluster.routing.allocation.enable": args.shard_allocation_mode}}
+    json_data = json.dumps(data)
+    print(json_data)
+    print(json.dumps(args.es_connection.cluster.put_settings(flat_settings=True, body=json_data), indent=2))
+
 def get_node_info(args):
     if args.node_id:
         args.node_id = args.node_id.replace(' ', '')

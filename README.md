@@ -48,8 +48,13 @@ To define the connection endpoint to your elasticsearch cluster, either use ```-
 
 ### Cluster Operations
 ```
-health        Retrieves cluster health
-state         Retrieves cluster state
+health              Retrieves cluster health
+state               Retrieves cluster state
+settings            Retrieves cluster settings
+set-shard-allocation
+                    Sets the shard allocation paramaters. Useful in case
+                    of a cluster maintenance to avoid unnecessary shard
+                    re-allocations when restarting nodes
 ```
 ### Node Operations
 ```

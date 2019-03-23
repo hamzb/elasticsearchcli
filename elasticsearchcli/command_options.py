@@ -38,7 +38,47 @@ cmd_options = {
                 'help': 'Retrieves cluster state',
                 'function': get_cluster_state,
                 'arguments':{}
-            }
+            },
+            'settings': {
+                'help': 'Retrieves cluster settings',
+                'function': get_cluster_settings,
+                'arguments':{
+                    'include_defaults': {
+                        'name': '--include-defaults',
+                        'dest': 'include_defaults',
+                        'required': False,
+                        'default': True,
+                        'help': 'Whether to include default settings'
+                    },
+                    'flat_settings': {
+                        'name': '--flat-settings',
+                        'dest': 'flat_settings',
+                        'required': False,
+                        'default': True,
+                        'help': 'Return settings in flat format'
+                    }
+                }
+            },
+            'set-shard-allocation': {
+                'help': 'Sets the shard allocation paramaters. Useful in case of a cluster maintenance to avoid unnecessary shard re-allocations when restarting nodes',
+                'function': set_shard_allocation,
+                'arguments':{
+                    'update_mode': {
+                        'name': '--update-mode',
+                        'dest': 'update_mode',
+                        'required': True,
+                        'default': None,
+                        'help': 'Update mode, either "persistent" (persists after a cluster restarts) or "transient" (is reset by a cluster restart)'
+                    },
+                    'shard_allocation_mode': {
+                        'name': '--shard-allocation-mode',
+                        'dest': 'shard_allocation_mode',
+                        'required': True,
+                        'default': None,
+                        'help': 'One of the following values: "all" - Allows shard allocation for all kinds of shards, "primaries" - Allows shard allocation only for primary shards, "new_primaries" - Allows shard allocation only for primary shards for new indices, "none" - No shard allocations of any kind are allowed for any indices'
+                    }
+                }
+            },
         }
     },
     'node': {
