@@ -55,6 +55,9 @@ set-shard-allocation
                     Sets the shard allocation paramaters. Useful in case
                     of a cluster maintenance to avoid unnecessary shard
                     re-allocations when restarting nodes
+reset-shard-allocation
+                        Resets the existing "persistent" or "transient" shard
+                        allocation paramaters
 ```
 ### Node Operations
 ```

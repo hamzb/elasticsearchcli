@@ -30,7 +30,11 @@ def set_shard_allocation(args):
         exit(1)
     data = {args.update_mode: {"cluster.routing.allocation.enable": args.shard_allocation_mode}}
     json_data = json.dumps(data)
-    print(json_data)
+    print(json.dumps(args.es_connection.cluster.put_settings(flat_settings=True, body=json_data), indent=2))
+
+def reset_shard_allocation(args):
+    data = '{"'+ args.update_mode + '": {"cluster.routing.allocation.enable": null}}'
+    json_data = json.loads(data)
     print(json.dumps(args.es_connection.cluster.put_settings(flat_settings=True, body=json_data), indent=2))
 
 def get_node_info(args):

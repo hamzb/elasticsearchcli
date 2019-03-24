@@ -79,6 +79,19 @@ cmd_options = {
                     }
                 }
             },
+            'reset-shard-allocation': {
+                'help': 'Resets the existing "persistent" or "transient" shard allocation paramaters',
+                'function': reset_shard_allocation,
+                'arguments':{
+                    'update_mode': {
+                        'name': '--update-mode',
+                        'dest': 'update_mode',
+                        'required': True,
+                        'default': None,
+                        'help': 'Update mode, either "persistent" (for settings that persists after a cluster restarts) or "transient" (for settings that do not persist after a cluster restart)'
+                    },
+                }
+            }
         }
     },
     'node': {
